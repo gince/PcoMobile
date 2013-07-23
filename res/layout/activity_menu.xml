@@ -20,7 +20,8 @@
             <Button
                 android:id="@+id/citation"
                 style="@style/menu_button"
-                android:text="@string/citation_button" />
+                android:text="@string/citation_button" 
+                android:onClick="startCitationActivity" />
             <Button
                 android:id="@+id/chalk"
                 style="@style/menu_button"
