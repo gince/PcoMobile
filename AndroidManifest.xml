@@ -30,8 +30,7 @@
         <activity
             android:name="edu.umass.parking.pcomobile.CitationActivity"
             android:label="@string/title_activity_citation"
-            android:parentActivityName="edu.umass.parking.pcomobile.MenuActivity"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            android:parentActivityName="edu.umass.parking.pcomobile.MenuActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.umass.parking.pcomobile.MenuActivity" />
