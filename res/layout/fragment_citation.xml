@@ -2,67 +2,133 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
     tools:context=".CitationActivity$DummySectionFragment" >
 
     <TextView
         android:id="@+id/section_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-       <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            tools:ignore="UselessParent" >
 
-            <Button
-                android:id="@+id/citation"
-                style="@style/menu_button"
-                android:text="@string/citation_button" 
-                android:onClick="startCitationActivity" />
-            <Button
-                android:id="@+id/chalk"
-                style="@style/menu_button"
-                android:text="@string/chalk_button" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_gravity="bottom|center_horizontal"
-            android:orientation="horizontal"
-            tools:ignore="UselessParent" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent" >
 
-            <Button
-                android:id="@+id/history"
-                style="@style/menu_button"
-                android:text="@string/history_button" />
-            <Button
-                android:id="@+id/paybycell"
-                style="@style/menu_button"
-                android:text="@string/paybycell_button" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_gravity="bottom|center_horizontal"
-            android:orientation="horizontal"
-            tools:ignore="UselessParent" >
+        <Button
+            android:id="@+id/state"
+            style="@style/citation_button"
+            android:text="@string/state_button" />
 
-            <Button
-                android:id="@+id/printer"
-                style="@style/menu_button"
-                android:text="@string/printer_button" />
-            <Button
-                android:id="@+id/logout"
-                style="@style/menu_button"
-                android:text="@string/logout_button" />
-        </LinearLayout>
-    
+        <Button
+            android:id="@+id/plate"
+            style="@style/citation_button"
+            android:text="@string/plate_button" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent" >
+
+        <Button
+            android:id="@+id/permit"
+            style="@style/citation_button"
+            android:text="@string/permit_button" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent" >
+
+        <Button
+            android:id="@+id/veh_make"
+            style="@style/citation_button"
+            android:text="@string/veh_make_button" />
+
+        <Button
+            android:id="@+id/veh_color"
+            style="@style/citation_button"
+            android:text="@string/veh_color_button" />
+
+        <Button
+            android:id="@+id/veh_type"
+            style="@style/citation_button"
+            android:text="@string/veh_type_button" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent" >
+
+        <Button
+            android:id="@+id/violtn_location"
+            style="@style/citation_button"
+            android:text="@string/violtn_loctn_button" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent" >
+
+        <Button
+            android:id="@+id/violtn_code"
+            style="@style/citation_button"
+            android:text="@string/violtn_code_button" />
+
+        <Button
+            android:id="@+id/fine"
+            style="@style/citation_button"
+            android:text="@string/fine_button" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent" >
+
+        <Button
+            android:id="@+id/pub_comments"
+            style="@style/citation_button"
+            android:text="@string/pub_comments_button" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent" >
+
+        <Button
+            android:id="@+id/pri_comments"
+            style="@style/citation_button"
+            android:text="@string/pri_comments_button" />
+    </LinearLayout>
+
 </LinearLayout>

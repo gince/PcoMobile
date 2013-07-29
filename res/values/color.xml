@@ -7,6 +7,7 @@
 	<color name="gray">#2e2e2e</color>
     <color name="androidBlue">#0099cc</color>
     <color name="menuButtonBg">@color/black</color>
-    <color name="menuButtonTx">@color/androidBlue</color>
-    <color name="backGround">@color/androidBlue</color>
+    <color name="menuButtonTx">@color/white</color>
+    <color name="citationButtonTx">@color/white</color>
+    <color name="backGround">@color/white</color>
 </resources>

@@ -20,11 +20,24 @@
     <string name="history_button">History</string>
     <string name="printer_button">Printer</string>
     <string name="logout_button">Sign out</string>
+    
+    <string name="state_button">State</string>
+    <string name="plate_button">Plate #</string>
+    <string name="permit_button">Permit #</string>
+    <string name="veh_make_button">Make</string>
+    <string name="veh_color_button">Color</string>
+    <string name="veh_type_button">Type</string>
+    <string name="violtn_loctn_button">Location</string>
+    <string name="violtn_code_button">Violation</string>
+    <string name="fine_button">Fine</string>
+    <string name="pub_comments_button">Comments (public)</string>
+    <string name="pri_comments_button">Comments (private)</string>
+    
     <string name="title_activity_citation">CitationActivity</string>
     <string name="title_section1">Citation</string>
     <string name="title_section2">Picture</string>
     <string name="title_section3">Save &amp; Exit</string>
     <string name="saveprint_dummy">Requires a list view probably ..</string>
     <string name="picture_dummy">Requires camera, three buttons, etc..</string>
-    
+
 </resources>
