@@ -1,5 +1,6 @@
-package edu.umass.parking.pcomobile;
+package edu.umass.parking.pcomobile.activities;
 
+import edu.umass.parking.pcomobile.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

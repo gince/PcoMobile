@@ -1,6 +1,8 @@
-package edu.umass.parking.pcomobile;
+package edu.umass.parking.pcomobile.activities;
 
 import java.util.Locale;
+
+import edu.umass.parking.pcomobile.R;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;

@@ -1,5 +1,6 @@
-package edu.umass.parking.pcomobile;
+package edu.umass.parking.pcomobile.activities;
 
+import edu.umass.parking.pcomobile.R;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;

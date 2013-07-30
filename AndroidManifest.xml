@@ -14,11 +14,11 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="edu.umass.parking.pcomobile.LoginActivity"
+            android:name="edu.umass.parking.pcomobile.activities.LoginActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="edu.umass.parking.pcomobile.MenuActivity"
+            android:name="edu.umass.parking.pcomobile.activities.MenuActivity"
             android:label="@string/title_activity_menu"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
             <intent-filter>
@@ -28,9 +28,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="edu.umass.parking.pcomobile.CitationActivity"
+            android:name="edu.umass.parking.pcomobile.activities.CitationActivity"
             android:label="@string/title_activity_citation"
-            android:parentActivityName="edu.umass.parking.pcomobile.MenuActivity" >
+            android:parentActivityName="edu.umass.parking.pcomobile.activities.MenuActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.umass.parking.pcomobile.MenuActivity" />

@@ -1,4 +1,4 @@
-package edu.umass.parking.pcomobile;
+package edu.umass.parking.pcomobile.helpers;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
