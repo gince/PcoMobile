@@ -1,3 +1,4 @@
+// The state model
 package edu.umass.parking.pcomobile.models;
 
 public class State {
@@ -6,10 +7,12 @@ public class State {
 	String _code;
 	String _description;
 
+	// empty constructor
 	public State() {
 
 	}
 
+	// constructor that takes all three attributes
 	public State(int id, String code, String description) {
 		this._id = id;
 		this._code = code;

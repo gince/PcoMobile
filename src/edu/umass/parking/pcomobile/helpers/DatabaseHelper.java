@@ -12,31 +12,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final int DATABASE_VERSION = 1; // may be deleted
 	private static final String DATABASE_NAME = "pcoMobile";
 
+	// attributes of states table
 	private static final String TABLE_STATES = "states";
 	public static final String COLUMN_STATES_ID = "id";
 	public static final String COLUMN_STATES_CODE = "code";
 	public static final String COLUMN_STATES_DESCRIPTION = "description";
 
+	// attributes of staff table
 	private static final String TABLE_STAFF = "staff";
 	public static final String COLUMN_STAFF_ID = "id";
 	public static final String COLUMN_STAFF_CODE = "code";
 	public static final String COLUMN_STAFF_DESCRIPTION = "description";
 
+	// constructor
 	public DatabaseHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
+		// query that creates STATES table
 		String createStatesTable = "CREATE TABLE " + TABLE_STATES + "("
 				+ COLUMN_STATES_ID + " INTEGER, "
 				+ COLUMN_STATES_CODE + " TEXT, " + COLUMN_STATES_DESCRIPTION
 				+ " TEXT);";
+		
+		// query that creates STAFF table
 		String createStaffTable = "CREATE TABLE " + TABLE_STAFF + "("
 				+ COLUMN_STAFF_ID + " INTEGER, "
 				+ COLUMN_STAFF_CODE + " TEXT, " + COLUMN_STAFF_DESCRIPTION
 				+ " TEXT);";
 
+		// tables are created
 		db.execSQL(createStatesTable);
 		db.execSQL(createStaffTable);
 	}

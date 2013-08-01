@@ -58,8 +58,6 @@ public class UpdateDbActivity extends Activity {
 		EditText wsDisplay = (EditText) findViewById(R.id.show_ws_results);
 		State s3 = dbh.getState("PR");
 		wsDisplay.setText(s3.getID() + "\t" + s3.getCode() + "\t" + s3.getDescription());
-		State s4 = dbh.getState("VI");
-
 	}
 
 }
