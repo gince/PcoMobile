@@ -1,22 +1,22 @@
 package edu.umass.parking.pcomobile.models;
 
-public class States {
+public class State {
 
 	int _id;
 	String _code;
 	String _description;
 
-	public States() {
+	public State() {
 
 	}
 
-	public States(int id, String code, String description) {
+	public State(int id, String code, String description) {
 		this._id = id;
 		this._code = code;
 		this._description = description;
 	}
 
-	public States(String code, String description) {
+	public State(String code, String description) {
 		this._code = code;
 		this._description = description;
 	}

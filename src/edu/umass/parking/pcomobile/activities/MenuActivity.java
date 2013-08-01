@@ -26,5 +26,10 @@ public class MenuActivity extends Activity {
 		Intent intent = new Intent(this, CitationActivity.class);
 		startActivity(intent);
 	}
+	
+	public void startUpdateDbActivity(View view) {
+		Intent intent = new Intent(this, UpdateDbActivity.class);
+		startActivity(intent);
+	}
 
 }

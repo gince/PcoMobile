@@ -35,6 +35,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.umass.parking.pcomobile.MenuActivity" />
         </activity>
+        <activity
+            android:name="edu.umass.parking.pcomobile.activities.UpdateDbActivity"
+            android:label="@string/title_activity_update_db" 
+            android:parentActivityName="edu.umass.parking.pcomobile.activities.MenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.umass.parking.pcomobile.MenuActivity" />
+        </activity>
     </application>
 
 </manifest>

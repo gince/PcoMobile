@@ -13,14 +13,16 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">Username or password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="title_activity_menu">MenuActivity</string>
+    <!-- menu buttons -->
     <string name="citation_button">Citation</string>
     <string name="chalk_button">Chalk</string>
     <string name="paybycell_button">PayByCell</string>
     <string name="history_button">History</string>
+    <string name="setup_button">Setup</string>
+    <string name="update_db_button">Update Database</string>
     <string name="printer_button">Printer</string>
     <string name="logout_button">Sign out</string>
-    
+    <!-- citation activity buttons -->
     <string name="state_button">State</string>
     <string name="plate_button">Plate #</string>
     <string name="permit_button">Permit #</string>
@@ -32,12 +34,17 @@
     <string name="fine_button">Fine</string>
     <string name="pub_comments_button">Comments (public)</string>
     <string name="pri_comments_button">Comments (private)</string>
-    
-    <string name="title_activity_citation">CitationActivity</string>
+    <!-- update db buttons -->
+    <string name="update_states_button">Update States</string>    
+    <!-- Activity titles -->
+    <string name="title_activity_menu">Main Menu</string>
+    <string name="title_activity_citation">Issue Citation</string>
     <string name="title_section1">Citation</string>
     <string name="title_section2">Picture</string>
     <string name="title_section3">Save &amp; Exit</string>
     <string name="saveprint_dummy">Requires a list view probably ..</string>
     <string name="picture_dummy">Requires camera, three buttons, etc..</string>
+    <string name="title_activity_update_db">UpdateDbActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>
