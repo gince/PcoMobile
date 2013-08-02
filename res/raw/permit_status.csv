@@ -1,0 +1,16 @@
+1,INV,Inventory
+2,AL,Allocated
+3,RES,Reserved
+4,IS,Issued
+5,AC,Active
+6,EX,Expired
+7,UNCON,Issued-Unconfirmed
+8,RET,Returned
+9,MISS,Missing
+10,DEACT,Deactivated
+11,TERM,Terminated
+12,UNREN,Unrenewed
+13,PNDALLOC,Pending Allocation
+14,PNRETINV,Pending Return to Main Inventory
+15,DEST,Destroyed
+16,MSNGCUST,Missing from Custody

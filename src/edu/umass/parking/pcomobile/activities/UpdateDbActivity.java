@@ -9,10 +9,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.widget.EditText;
 import edu.umass.parking.pcomobile.R;
 import edu.umass.parking.pcomobile.helpers.DatabaseHelper;
-import edu.umass.parking.pcomobile.models.State;
+import edu.umass.parking.pcomobile.models.Lookup;
 
 public class UpdateDbActivity extends Activity {
 
@@ -29,14 +28,28 @@ public class UpdateDbActivity extends Activity {
 		return true;
 	}
 
-	public void updateStatesTable(View view) {
+	public void updateLookupTables(View view) {
+		updateLookupTable("states");
+		updateLookupTable("vehicle_colors");
+		updateLookupTable("vehicle_makes");
+		updateLookupTable("permit_status");
+		updateLookupTable("plate_types");
+	}
+
+	// updates a given table getting data from the csv file
+	// which must have the same name as the table to be updated
+	public void updateLookupTable(String tableName) {
 		DatabaseHelper dbh = new DatabaseHelper(this);
-		
-		// parsing the states.csv file under res/raw
-		InputStream is = getResources().openRawResource(R.raw.states);
+
+		// gets the id of the csv file under res/raw
+		int resID = getResources().getIdentifier(tableName, "raw",
+				getPackageName());
+
+		// parses the .csv and add entries into the corresponding table
+		InputStream is = getResources().openRawResource(resID);
 		InputStreamReader isr = new InputStreamReader(is);
 		BufferedReader br = new BufferedReader(isr);
-		
+
 		String strLine;
 		try {
 			while ((strLine = br.readLine()) != null) {
@@ -45,9 +58,9 @@ public class UpdateDbActivity extends Activity {
 					String code = pieces[1];
 					String desc = pieces[2];
 					int id = Integer.parseInt(pieces[0]);
-					
-					State s = new State(id, code, desc);
-					dbh.addState(s);
+
+					Lookup l = new Lookup(id, code, desc);
+					dbh.addToLookupTable(l, tableName);
 				}
 			}
 		} catch (IOException e) {
@@ -55,9 +68,55 @@ public class UpdateDbActivity extends Activity {
 			e.printStackTrace();
 		}
 
-		EditText wsDisplay = (EditText) findViewById(R.id.show_ws_results);
-		State s3 = dbh.getState("PR");
-		wsDisplay.setText(s3.getID() + "\t" + s3.getCode() + "\t" + s3.getDescription());
 	}
+	
+/*	public void updatePermitVehicleTable() {
+		DatabaseHelper dbh = new DatabaseHelper(this);
 
+		// parses the .csv abd add entries into the corresponding table
+		InputStream is = getResources().openRawResource(resID);
+		InputStreamReader isr = new InputStreamReader(is);
+		BufferedReader br = new BufferedReader(isr);
+
+		String strLine;
+		try {
+			while ((strLine = br.readLine()) != null) {
+				String pieces[] = strLine.split(",");
+				if (pieces.length == 3) {
+					String code = pieces[1];
+					String desc = pieces[2];
+					int id = Integer.parseInt(pieces[0]);
+
+					Lookup l = new Lookup(id, code, desc);
+					dbh.addToLookupTable(l, tableName);
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+*/
+
+	/*
+	 * public void updateStatesTable(View view) { DatabaseHelper dbh = new
+	 * DatabaseHelper(this);
+	 * 
+	 * // parsing the states.csv file under res/raw InputStream is =
+	 * getResources().openRawResource(R.raw.states); InputStreamReader isr = new
+	 * InputStreamReader(is); BufferedReader br = new BufferedReader(isr);
+	 * 
+	 * String strLine; try { while ((strLine = br.readLine()) != null) { String
+	 * pieces[] = strLine.split(","); if (pieces.length == 3) { String code =
+	 * pieces[1]; String desc = pieces[2]; int id = Integer.parseInt(pieces[0]);
+	 * 
+	 * State s = new State(id, code, desc); dbh.addState(s); } } } catch
+	 * (IOException e) { // TODO Auto-generated catch block e.printStackTrace();
+	 * }
+	 * 
+	 * EditText wsDisplay = (EditText) findViewById(R.id.show_ws_results); State
+	 * s3 = dbh.getState("PR"); wsDisplay.setText(s3.getID() + "\t" +
+	 * s3.getCode() + "\t" + s3.getDescription()); }
+	 */
 }

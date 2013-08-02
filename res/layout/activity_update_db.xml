@@ -8,8 +8,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/update_states_button"
-        android:onClick="updateStatesTable" />
+        android:text="@string/update_lookups_button"
+        android:onClick="updateLookupTables" />
 
     <EditText
         android:id="@+id/show_ws_results"

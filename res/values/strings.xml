@@ -35,7 +35,7 @@
     <string name="pub_comments_button">Comments (public)</string>
     <string name="pri_comments_button">Comments (private)</string>
     <!-- update db buttons -->
-    <string name="update_states_button">Update States</string>    
+    <string name="update_lookups_button">Update Lookups</string>    
     <!-- Activity titles -->
     <string name="title_activity_menu">Main Menu</string>
     <string name="title_activity_citation">Issue Citation</string>

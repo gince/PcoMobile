@@ -5,12 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import edu.umass.parking.pcomobile.models.PermitStatus;
+import edu.umass.parking.pcomobile.models.Lookup;
 import edu.umass.parking.pcomobile.models.PermitVehicle;
-import edu.umass.parking.pcomobile.models.State;
-import edu.umass.parking.pcomobile.models.VehicleColor;
-import edu.umass.parking.pcomobile.models.VehicleMake;
-import edu.umass.parking.pcomobile.models.VehiclePlateType;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -23,36 +19,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public static final String COLUMN_STAFF_CODE = "code";
 	public static final String COLUMN_STAFF_DESC = "description";
 
-	// attributes of states table
+	// lookup table names
 	private static final String TABLE_STATES = "states";
-	public static final String COLUMN_STATE_ID = "id";
-	public static final String COLUMN_STATE_CODE = "code";
-	public static final String COLUMN_STATE_DESC = "description";
-
-	// attributes of vehicle color table
 	private static final String TABLE_VEH_COLORS = "vehicle_colors";
-	public static final String COLUMN_VEH_COLOR_ID = "id";
-	public static final String COLUMN_VEH_COLOR_CODE = "code";
-	public static final String COLUMN_VEH_COLOR_DESC = "description";
-
-	// attributes of vehicle make table
 	private static final String TABLE_VEH_MAKES = "vehicle_makes";
-	public static final String COLUMN_VEH_MAKE_ID = "id";
-	public static final String COLUMN_VEH_MAKE_CODE = "code";
-	public static final String COLUMN_VEH_MAKE_DESC = "description";
-
-	// attributes of vehicle plate type table
 	private static final String TABLE_PLATE_TYPES = "plate_types";
-	public static final String COLUMN_PLATE_TYPE_ID = "id";
-	public static final String COLUMN_PLATE_TYPE_CODE = "code";
-	public static final String COLUMN_PLATE_TYPE_DESC = "description";
-
-	// attributes of permit status table
 	private static final String TABLE_PERMIT_STATUS = "permit_status";
-	public static final String COLUMN_PERMIT_STATUS_ID = "id";
-	public static final String COLUMN_PERMIT_STATUS_CODE = "code";
-	public static final String COLUMN_PERMIT_STATUS_DESC = "description";
-
+	
+	// attributes of lookup table
+	public static final String COLUMN_ID = "id";
+	public static final String COLUMN_CODE = "code";
+	public static final String COLUMN_DESC = "description";
+	
 	// attributes of PermitVehicle table
 	private static final String TABLE_PERMIT_VEHICLE = "permit_vehicle";
 	public static final String COLUMN_PERVEH_ID = "id";
@@ -77,36 +55,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		String createStaffTable = "CREATE TABLE " + TABLE_STAFF + "("
 				+ COLUMN_STAFF_ID + " INTEGER, " + COLUMN_STAFF_CODE
 				+ " TEXT, " + COLUMN_STAFF_DESC + " TEXT);";
-
-		// query that creates STATES table
-		String createStatesTable = "CREATE TABLE " + TABLE_STATES + "("
-				+ COLUMN_STATE_ID + " INTEGER, " + COLUMN_STATE_CODE
-				+ " TEXT, " + COLUMN_STATE_DESC + " TEXT);";
-
-		// query that creates TABLE_VEH_COLORS table
-		String createVehicleColorsTable = "CREATE TABLE " + TABLE_VEH_COLORS
-				+ "(" + COLUMN_VEH_COLOR_ID + " INTEGER, "
-				+ COLUMN_VEH_COLOR_CODE + " TEXT, " + COLUMN_VEH_COLOR_DESC
-				+ " TEXT);";
-
-		// query that creates TABLE_VEH_MAKES table
-		String createVehicleMakesTable = "CREATE TABLE " + TABLE_VEH_MAKES
-				+ "(" + COLUMN_VEH_MAKE_ID + " INTEGER, "
-				+ COLUMN_VEH_MAKE_CODE + " TEXT, " + COLUMN_VEH_MAKE_DESC
-				+ " TEXT);";
-
-		// query that creates TABLE_PLATE_TYPES table
-		String createPlateTypesTable = "CREATE TABLE " + TABLE_PLATE_TYPES
-				+ "(" + COLUMN_PLATE_TYPE_ID + " INTEGER, "
-				+ COLUMN_PLATE_TYPE_CODE + " TEXT, " + COLUMN_PLATE_TYPE_DESC
-				+ " TEXT);";
-
-		// query that creates TABLE_PERMIT_STATUS table
-		String createPermitStatusTable = "CREATE TABLE " + TABLE_PERMIT_STATUS
-				+ "(" + COLUMN_PERMIT_STATUS_ID + " INTEGER, "
-				+ COLUMN_PERMIT_STATUS_CODE + " TEXT, "
-				+ COLUMN_PERMIT_STATUS_DESC + " TEXT);";
-
+		
+		String createStatesTable = getCreateLookupTableQuery(TABLE_STATES);
+		String createVehicleColorsTable = getCreateLookupTableQuery(TABLE_VEH_COLORS);
+		String createVehicleMakesTable = getCreateLookupTableQuery(TABLE_VEH_MAKES);
+		String createPlateTypesTable = getCreateLookupTableQuery(TABLE_PLATE_TYPES);
+		String createPermitStatusTable = getCreateLookupTableQuery(TABLE_PERMIT_STATUS);
+		
 		// query that creates TABLE_PERMIT_VEHICLE table
 		String createPermitVehicleTable = "CREATE TABLE "
 				+ TABLE_PERMIT_VEHICLE + "(" + COLUMN_PERVEH_ID + " INTEGER, "
@@ -129,6 +84,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL(createPermitVehicleTable);
 
 	}
+	
+	public String getCreateLookupTableQuery(String tableName) {
+		String query = "CREATE TABLE " + tableName + "("
+				+ COLUMN_ID + " INTEGER, " + COLUMN_CODE
+				+ " TEXT, " + COLUMN_DESC + " TEXT);";
+		return query;
+	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -142,73 +104,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 
-	// ADD functions
-	public void addState(State state) {
+	// ADD functions for Lookup tables
+	public void addToLookupTable(Lookup l, String tableName) {
 
 		ContentValues values = new ContentValues();
-		values.put(COLUMN_STATE_ID, state.getID());
-		values.put(COLUMN_STATE_CODE, state.getCode());
-		values.put(COLUMN_STATE_DESC, state.getDescription());
+		values.put(COLUMN_ID, l.getID());
+		values.put(COLUMN_CODE, l.getCode());
+		values.put(COLUMN_DESC, l.getDescription());
 
 		SQLiteDatabase db = this.getWritableDatabase();
 
-		db.insert(TABLE_STATES, null, values);
+		db.insert(tableName, null, values);
 		db.close();
 	}
-
-	public void addVehColor(VehicleColor color) {
-
-		ContentValues values = new ContentValues();
-		values.put(COLUMN_VEH_COLOR_ID, color.getID());
-		values.put(COLUMN_VEH_COLOR_CODE, color.getCode());
-		values.put(COLUMN_VEH_COLOR_DESC, color.getDescription());
-
-		SQLiteDatabase db = this.getWritableDatabase();
-
-		db.insert(TABLE_VEH_COLORS, null, values);
-		db.close();
-	}
-
-	public void addVehMake(VehicleMake make) {
-
-		ContentValues values = new ContentValues();
-		values.put(COLUMN_VEH_MAKE_ID, make.getID());
-		values.put(COLUMN_VEH_MAKE_CODE, make.getCode());
-		values.put(COLUMN_VEH_MAKE_DESC, make.getDescription());
-
-		SQLiteDatabase db = this.getWritableDatabase();
-
-		db.insert(TABLE_VEH_MAKES, null, values);
-		db.close();
-	}
-
-	public void addState(VehiclePlateType type) {
-
-		ContentValues values = new ContentValues();
-		values.put(COLUMN_PLATE_TYPE_ID, type.getID());
-		values.put(COLUMN_PLATE_TYPE_CODE, type.getCode());
-		values.put(COLUMN_PLATE_TYPE_DESC, type.getDescription());
-
-		SQLiteDatabase db = this.getWritableDatabase();
-
-		db.insert(TABLE_PLATE_TYPES, null, values);
-		db.close();
-	}
-
-	public void addPermitStatus(PermitStatus status) {
-
-		ContentValues values = new ContentValues();
-		values.put(COLUMN_PERMIT_STATUS_ID, status.getID());
-		values.put(COLUMN_PERMIT_STATUS_CODE, status.getCode());
-		values.put(COLUMN_PERMIT_STATUS_DESC, status.getDescription());
-
-		SQLiteDatabase db = this.getWritableDatabase();
-
-		db.insert(TABLE_PERMIT_STATUS, null, values);
-		db.close();
-	}
-
-	public void addState(PermitVehicle perveh) {
+	
+	public void addPermitVehicle(PermitVehicle perveh) {
 
 		ContentValues values = new ContentValues();
 		values.put(COLUMN_PERVEH_ID, perveh.getID());
@@ -228,26 +138,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.close();
 	}
 
-	public State getState(String scode) {
-		String query = "Select * FROM " + TABLE_STATES + " WHERE "
-				+ COLUMN_STATE_CODE + " =  \"" + scode + "\"";
+	public Lookup getLookupEntry(String code, String tableName) {
+		String query = "Select * FROM " + tableName + " WHERE "
+				+ COLUMN_CODE + " =  \"" + code + "\"";
 
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		Cursor cursor = db.rawQuery(query, null);
 
-		State s = new State();
+		Lookup l = new Lookup();
 
 		if (cursor.moveToFirst()) {
 			cursor.moveToFirst();
-			s.setID(Integer.parseInt(cursor.getString(0)));
-			s.setCode(cursor.getString(1));
-			s.setDescription(cursor.getString(2));
+			l.setID(Integer.parseInt(cursor.getString(0)));
+			l.setCode(cursor.getString(1));
+			l.setDescription(cursor.getString(2));
 			cursor.close();
 		} else {
-			s = null;
+			l = null;
 		}
 		db.close();
-		return s;
+		return l;
 	}
 }
