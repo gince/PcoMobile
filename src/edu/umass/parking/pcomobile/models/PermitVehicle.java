@@ -18,10 +18,11 @@ public class PermitVehicle {
 		
 	}
 	
-	public PermitVehicle(String perNmbr, String perStrt, String perExpr) {
+	public PermitVehicle(String perNmbr, String perStrt, String perExpr, int perStts) {
 		this._perNmbr = perNmbr;
 		this._perStrt = perStrt;
-		this._perExpr = perExpr;		
+		this._perExpr = perExpr;
+		this._perStts = perStts;
 	}
 
 	public PermitVehicle(String perNmbr, String perStrt, String perExpr, int perStts, int vehState, int vehType, int vehColor, int vehMake, String vehPlate) {

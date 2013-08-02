@@ -12,6 +12,7 @@ import android.view.View;
 import edu.umass.parking.pcomobile.R;
 import edu.umass.parking.pcomobile.helpers.DatabaseHelper;
 import edu.umass.parking.pcomobile.models.Lookup;
+import edu.umass.parking.pcomobile.models.PermitVehicle;
 
 public class UpdateDbActivity extends Activity {
 
@@ -29,11 +30,12 @@ public class UpdateDbActivity extends Activity {
 	}
 
 	public void updateLookupTables(View view) {
-		updateLookupTable("states");
-		updateLookupTable("vehicle_colors");
-		updateLookupTable("vehicle_makes");
-		updateLookupTable("permit_status");
-		updateLookupTable("plate_types");
+//		updateLookupTable("states");
+//		updateLookupTable("vehicle_colors");
+//		updateLookupTable("vehicle_makes");
+//		updateLookupTable("permit_status");
+//		updateLookupTable("plate_types");
+		updatePermitVehicleTable();
 	}
 
 	// updates a given table getting data from the csv file
@@ -69,27 +71,45 @@ public class UpdateDbActivity extends Activity {
 		}
 
 	}
-	
-/*	public void updatePermitVehicleTable() {
-		DatabaseHelper dbh = new DatabaseHelper(this);
 
-		// parses the .csv abd add entries into the corresponding table
-		InputStream is = getResources().openRawResource(resID);
+	public void updatePermitVehicleTable() {
+		DatabaseHelper dbh = new DatabaseHelper(this);
+		InputStream is = getResources().openRawResource(R.raw.perveh_demo);
 		InputStreamReader isr = new InputStreamReader(is);
 		BufferedReader br = new BufferedReader(isr);
 
 		String strLine;
+		PermitVehicle pv;
 		try {
 			while ((strLine = br.readLine()) != null) {
-				String pieces[] = strLine.split(",");
-				if (pieces.length == 3) {
-					String code = pieces[1];
-					String desc = pieces[2];
-					int id = Integer.parseInt(pieces[0]);
-
-					Lookup l = new Lookup(id, code, desc);
-					dbh.addToLookupTable(l, tableName);
+				try {
+					String perNmbr = (String) strLine.subSequence(0, 9);
+					String perStrt = (String) strLine.subSequence(9, 15);
+					String perExpr = (String) strLine.subSequence(15, 21);
+					int perStts = Integer.parseInt((String) strLine
+							.subSequence(21, 25));
+					int vehState = Integer.parseInt((String) strLine
+							.subSequence(25, 29));
+					int vehType = Integer.parseInt((String) strLine
+							.subSequence(29, 33));
+					int vehColor = Integer.parseInt((String) strLine
+							.subSequence(33, 37));
+					int vehMake = Integer.parseInt((String) strLine
+							.subSequence(37, 41));
+					String vehPlate = (String) strLine.subSequence(41,
+							strLine.length());
+					
+					pv = new PermitVehicle(perNmbr, perStrt, perExpr, perStts, vehState, vehType, vehColor, vehMake, vehPlate);
+				} catch (Exception e) {
+					String perNmbr = (String) strLine.subSequence(0, 9);
+					String perStrt = (String) strLine.subSequence(9, 15);
+					String perExpr = (String) strLine.subSequence(15, 21);
+					int perStts = Integer.parseInt((String) strLine
+							.subSequence(21, 25));
+					pv = new PermitVehicle(perNmbr, perStrt, perExpr, perStts);
 				}
+				
+				dbh.addToPermitVehicleTable(pv);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -97,24 +117,7 @@ public class UpdateDbActivity extends Activity {
 		}
 
 	}
-*/
-
 	/*
-	 * public void updateStatesTable(View view) { DatabaseHelper dbh = new
-	 * DatabaseHelper(this);
-	 * 
-	 * // parsing the states.csv file under res/raw InputStream is =
-	 * getResources().openRawResource(R.raw.states); InputStreamReader isr = new
-	 * InputStreamReader(is); BufferedReader br = new BufferedReader(isr);
-	 * 
-	 * String strLine; try { while ((strLine = br.readLine()) != null) { String
-	 * pieces[] = strLine.split(","); if (pieces.length == 3) { String code =
-	 * pieces[1]; String desc = pieces[2]; int id = Integer.parseInt(pieces[0]);
-	 * 
-	 * State s = new State(id, code, desc); dbh.addState(s); } } } catch
-	 * (IOException e) { // TODO Auto-generated catch block e.printStackTrace();
-	 * }
-	 * 
 	 * EditText wsDisplay = (EditText) findViewById(R.id.show_ws_results); State
 	 * s3 = dbh.getState("PR"); wsDisplay.setText(s3.getID() + "\t" +
 	 * s3.getCode() + "\t" + s3.getDescription()); }

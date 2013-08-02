@@ -64,7 +64,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		
 		// query that creates TABLE_PERMIT_VEHICLE table
 		String createPermitVehicleTable = "CREATE TABLE "
-				+ TABLE_PERMIT_VEHICLE + "(" + COLUMN_PERVEH_ID + " INTEGER, "
+				+ TABLE_PERMIT_VEHICLE + "(" + COLUMN_PERVEH_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , "
 				+ COLUMN_PERVEH_PER_NMBR + " TEXT, " + COLUMN_PERVEH_PER_STRT
 				+ " TEXT, " + COLUMN_PERVEH_PER_EXPR + " TEXT, "
 				+ COLUMN_PERVEH_PER_STTS + " INTEGER, "
@@ -118,10 +118,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.close();
 	}
 	
-	public void addPermitVehicle(PermitVehicle perveh) {
+	public void addToPermitVehicleTable(PermitVehicle perveh) {
 
 		ContentValues values = new ContentValues();
-		values.put(COLUMN_PERVEH_ID, perveh.getID());
 		values.put(COLUMN_PERVEH_PER_NMBR, perveh.getPerNumber());
 		values.put(COLUMN_PERVEH_PER_STRT, perveh.getPerStartDate());
 		values.put(COLUMN_PERVEH_PER_EXPR, perveh.getPerExpireDate());
