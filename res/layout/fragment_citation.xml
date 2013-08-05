@@ -22,12 +22,12 @@
         tools:ignore="UselessParent" >
 
         <Button
-            android:id="@+id/state"
+            android:id="@+id/state_button"
             style="@style/citation_button"
             android:text="@string/state_button" />
 
         <Button
-            android:id="@+id/plate"
+            android:id="@+id/plate_button"
             style="@style/citation_button"
             android:text="@string/plate_button" />
     </LinearLayout>
@@ -41,7 +41,7 @@
         tools:ignore="UselessParent" >
 
         <Button
-            android:id="@+id/permit"
+            android:id="@+id/permit_button"
             style="@style/citation_button"
             android:text="@string/permit_button" />
     </LinearLayout>
@@ -55,17 +55,17 @@
         tools:ignore="UselessParent" >
 
         <Button
-            android:id="@+id/veh_make"
+            android:id="@+id/veh_make_button"
             style="@style/citation_button"
             android:text="@string/veh_make_button" />
 
         <Button
-            android:id="@+id/veh_color"
+            android:id="@+id/veh_color_button"
             style="@style/citation_button"
             android:text="@string/veh_color_button" />
 
         <Button
-            android:id="@+id/veh_type"
+            android:id="@+id/veh_type_button"
             style="@style/citation_button"
             android:text="@string/veh_type_button" />
     </LinearLayout>
@@ -79,7 +79,7 @@
         tools:ignore="UselessParent" >
 
         <Button
-            android:id="@+id/violtn_location"
+            android:id="@+id/violtn_location_button"
             style="@style/citation_button"
             android:text="@string/violtn_loctn_button" />
     </LinearLayout>
@@ -93,12 +93,12 @@
         tools:ignore="UselessParent" >
 
         <Button
-            android:id="@+id/violtn_code"
+            android:id="@+id/violtn_code_button"
             style="@style/citation_button"
             android:text="@string/violtn_code_button" />
 
         <Button
-            android:id="@+id/fine"
+            android:id="@+id/fine_button"
             style="@style/citation_button"
             android:text="@string/fine_button" />
     </LinearLayout>
@@ -112,7 +112,7 @@
         tools:ignore="UselessParent" >
 
         <Button
-            android:id="@+id/pub_comments"
+            android:id="@+id/pub_comments_button"
             style="@style/citation_button"
             android:text="@string/pub_comments_button" />
     </LinearLayout>
@@ -126,7 +126,7 @@
         tools:ignore="UselessParent" >
 
         <Button
-            android:id="@+id/pri_comments"
+            android:id="@+id/pri_comments_button"
             style="@style/citation_button"
             android:text="@string/pri_comments_button" />
     </LinearLayout>
