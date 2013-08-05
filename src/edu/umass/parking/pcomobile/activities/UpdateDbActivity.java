@@ -30,11 +30,11 @@ public class UpdateDbActivity extends Activity {
 	}
 
 	public void updateLookupTables(View view) {
-//		updateLookupTable("states");
-//		updateLookupTable("vehicle_colors");
-//		updateLookupTable("vehicle_makes");
-//		updateLookupTable("permit_status");
-//		updateLookupTable("plate_types");
+		updateLookupTable("states");
+		updateLookupTable("vehicle_colors");
+		updateLookupTable("vehicle_makes");
+		updateLookupTable("permit_status");
+		updateLookupTable("plate_types");
 		updatePermitVehicleTable();
 	}
 
@@ -74,7 +74,7 @@ public class UpdateDbActivity extends Activity {
 
 	public void updatePermitVehicleTable() {
 		DatabaseHelper dbh = new DatabaseHelper(this);
-		InputStream is = getResources().openRawResource(R.raw.perveh_demo);
+		InputStream is = getResources().openRawResource(R.raw.permitvehicle);
 		InputStreamReader isr = new InputStreamReader(is);
 		BufferedReader br = new BufferedReader(isr);
 
@@ -83,7 +83,7 @@ public class UpdateDbActivity extends Activity {
 		try {
 			while ((strLine = br.readLine()) != null) {
 				try {
-					String perNmbr = (String) strLine.subSequence(0, 9);
+					String perNmbr = ((String) strLine.subSequence(0, 9)).replace("#", "");
 					String perStrt = (String) strLine.subSequence(9, 15);
 					String perExpr = (String) strLine.subSequence(15, 21);
 					int perStts = Integer.parseInt((String) strLine
@@ -101,7 +101,7 @@ public class UpdateDbActivity extends Activity {
 					
 					pv = new PermitVehicle(perNmbr, perStrt, perExpr, perStts, vehState, vehType, vehColor, vehMake, vehPlate);
 				} catch (Exception e) {
-					String perNmbr = (String) strLine.subSequence(0, 9);
+					String perNmbr = ((String) strLine.subSequence(0, 9)).replace("#", "");
 					String perStrt = (String) strLine.subSequence(9, 15);
 					String perExpr = (String) strLine.subSequence(15, 21);
 					int perStts = Integer.parseInt((String) strLine
