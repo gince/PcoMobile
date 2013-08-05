@@ -24,7 +24,8 @@
         <Button
             android:id="@+id/state_button"
             style="@style/citation_button"
-            android:text="@string/state_button" />
+            android:text="@string/state_button"
+            android:onClick="confirmFireMissiles" />
 
         <Button
             android:id="@+id/plate_button"

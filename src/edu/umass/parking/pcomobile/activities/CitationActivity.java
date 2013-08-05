@@ -2,11 +2,13 @@ package edu.umass.parking.pcomobile.activities;
 
 import java.util.Locale;
 
-import edu.umass.parking.pcomobile.R;
-
 import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -19,6 +21,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
+import edu.umass.parking.pcomobile.R;
 
 public class CitationActivity extends FragmentActivity implements
 		ActionBar.TabListener {
@@ -37,6 +41,7 @@ public class CitationActivity extends FragmentActivity implements
 	 * The {@link ViewPager} that will host the section contents.
 	 */
 	ViewPager mViewPager;
+	Button mStateButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +53,10 @@ public class CitationActivity extends FragmentActivity implements
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		// Show the Up button in the action bar.
 		actionBar.setDisplayHomeAsUpEnabled(true);
-		
+
 		// Hide the Android status bar.
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-		        WindowManager.LayoutParams.FLAG_FULLSCREEN);
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
@@ -83,6 +88,11 @@ public class CitationActivity extends FragmentActivity implements
 					.setText(mSectionsPagerAdapter.getPageTitle(i))
 					.setTabListener(this));
 		}
+	}
+
+	public void confirmFireMissiles(View v) {
+		DialogFragment newFragment = new CitationDialog();
+		newFragment.show(getSupportFragmentManager(), "missiles");
 	}
 
 	@Override
@@ -142,16 +152,15 @@ public class CitationActivity extends FragmentActivity implements
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a DummySectionFragment (defined as a static inner class
 			// below) with the page number as its lone argument.
-			
-			//TO BE DELETED
-/*			Fragment fragment = new DummySectionFragment();
-			Bundle args = new Bundle();
-			args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-			fragment.setArguments(args);
-			return fragment;
-*/		
+
+			// TO BE DELETED
+			/*
+			 * Fragment fragment = new DummySectionFragment(); Bundle args = new
+			 * Bundle(); args.putInt(DummySectionFragment.ARG_SECTION_NUMBER,
+			 * position + 1); fragment.setArguments(args); return fragment;
+			 */
 			Fragment f;
-			switch(position) {
+			switch (position) {
 			case 0:
 				f = new CitationFragment();
 				break;
@@ -161,11 +170,12 @@ public class CitationActivity extends FragmentActivity implements
 			case 2:
 				f = new SavePrintFragment();
 				break;
-	        default:
-	            throw new IllegalArgumentException("not this many fragments: " + position);
+			default:
+				throw new IllegalArgumentException("not this many fragments: "
+						+ position);
 			}
 			return f;
-	
+
 		}
 
 		@Override
@@ -204,10 +214,11 @@ public class CitationActivity extends FragmentActivity implements
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_citation,
 					container, false);
+
 			return rootView;
 		}
 	}
-	
+
 	public static class PictureFragment extends Fragment {
 		/**
 		 * The fragment argument representing the section number for this
@@ -243,6 +254,39 @@ public class CitationActivity extends FragmentActivity implements
 			View rootView = inflater.inflate(R.layout.fragment_saveprint,
 					container, false);
 			return rootView;
+		}
+	}
+
+	public class CitationDialog extends DialogFragment {
+		/** The system calls this only when creating the layout in a dialog. */
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			// Get the layout inflater
+			LayoutInflater inflater = getActivity().getLayoutInflater();
+
+			// Inflate and set the layout for the dialog
+			// Pass null as the parent view because its going in the dialog
+			// layout
+			builder.setView(
+					inflater.inflate(R.layout.dialog_citation_state, null))
+					// Add action buttons
+					.setPositiveButton("gir",
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int id) {
+									// sign in the user ...
+								}
+							})
+					.setNegativeButton("cik",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int id) {
+									CitationDialog.this.getDialog().cancel();
+								}
+							});
+			return builder.create();
 		}
 	}
 }
