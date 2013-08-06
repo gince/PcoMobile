@@ -12,7 +12,7 @@
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:background="#90909090" />
+        android:background="@color/citationButtonStroke" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,14 +25,14 @@
             android:id="@+id/state_button"
             style="@style/citation_button"
             android:onClick="showDialog"
-            android:tag="State"
+            android:tag="@string/state_button"
             android:padding="1dp"
             android:text="@string/state_button" />
 
         <View
             android:layout_width="1dp"
             android:layout_height="fill_parent"
-            android:background="#90909090" />
+        android:background="@color/citationButtonStroke" />
 
         <Button
             android:id="@+id/plate_button"
@@ -40,14 +40,14 @@
             android:padding="1dp"
             android:text="@string/plate_button"
             android:onClick="showDialog"
-            android:tag="Plate #" />
+            android:tag="@string/plate_button" />
         
     </LinearLayout>
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:background="#90909090" />
+        android:background="@color/citationButtonStroke" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -62,14 +62,14 @@
             style="@style/citation_button"
             android:text="@string/permit_button" 
             android:onClick="showDialog"
-            android:tag="Permit #" />
+            android:tag="@string/permit_button" />
         
     </LinearLayout>
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:background="#90909090" />
+        android:background="@color/citationButtonStroke" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -84,38 +84,38 @@
             style="@style/citation_button"
             android:text="@string/veh_make_button" 
             android:onClick="showDialog"
-            android:tag="Vehicle Make" />
+            android:tag="@string/veh_make_button" />
 
         <View
             android:layout_width="1dp"
             android:layout_height="fill_parent"
-            android:background="#90909090" />
+	        android:background="@color/citationButtonStroke" />
 
         <Button
             android:id="@+id/veh_color_button"
             style="@style/citation_button"
             android:text="@string/veh_color_button" 
             android:onClick="showDialog"
-            android:tag="Vehicle Color" />
+            android:tag="@string/veh_color_button" />
 
         <View
             android:layout_width="1dp"
             android:layout_height="fill_parent"
-            android:background="#90909090" />
+	        android:background="@color/citationButtonStroke" />
 
         <Button
             android:id="@+id/veh_type_button"
             style="@style/citation_button"
             android:text="@string/veh_type_button" 
             android:onClick="showDialog"
-            android:tag="Vehicle Type" />
+            android:tag="@string/veh_type_button" />
         
     </LinearLayout>
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:background="#90909090" />
+        android:background="@color/citationButtonStroke" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -130,14 +130,14 @@
             style="@style/citation_button"
             android:text="@string/violtn_loctn_button" 
             android:onClick="showDialog"
-            android:tag="Location" />
+            android:tag="@string/violtn_loctn_button" />
         
     </LinearLayout>
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:background="#90909090" />
+        android:background="@color/citationButtonStroke" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -152,26 +152,26 @@
             style="@style/citation_button"
             android:text="@string/violtn_code_button" 
             android:onClick="showDialog"
-            android:tag="Violation" />
+            android:tag="@string/violtn_code_button" />
 
         <View
             android:layout_width="1dp"
             android:layout_height="fill_parent"
-            android:background="#90909090" />
+	        android:background="@color/citationButtonStroke" />
 
         <Button
             android:id="@+id/fine_button"
             style="@style/citation_button"
             android:text="@string/fine_button" 
             android:onClick="showDialog"
-            android:tag="Fine" />
+            android:tag="@string/fine_button" />
         
     </LinearLayout>
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:background="#90909090" />
+        android:background="@color/citationButtonStroke" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -186,14 +186,14 @@
             style="@style/citation_button"
             android:text="@string/pub_comments_button" 
             android:onClick="showDialog"
-            android:tag="Public Comments" />
+            android:tag="@string/pub_comments_button" />
         
     </LinearLayout>
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:background="#90909090" />
+        android:background="@color/citationButtonStroke" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -208,13 +208,13 @@
             style="@style/citation_button"
             android:text="@string/pri_comments_button" 
             android:onClick="showDialog"
-            android:tag="Private Comments" />
+            android:tag="@string/pri_comments_button" />
         
     </LinearLayout>
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:background="#90909090" />
+        android:background="@color/citationButtonStroke" />
 
 </LinearLayout>

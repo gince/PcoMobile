@@ -12,4 +12,5 @@
     <color name="menuButtonTx">@color/white</color>
     <color name="citationButtonTx">@color/white</color>
     <color name="backGround">@color/white</color>
+    <color name="citationButtonStroke">#90909090</color>
 </resources>

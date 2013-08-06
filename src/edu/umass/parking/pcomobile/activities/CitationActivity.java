@@ -93,10 +93,13 @@ public class CitationActivity extends FragmentActivity implements
 
 	// Opens the dialog windows to enter citation parameters
 	public void showDialog(View v) {
-		String title = (String) v.getTag();
 		int button_id = v.getId();
-		DialogFragment newFragment = new CitationDialog(title, button_id);
-		newFragment.show(getSupportFragmentManager(), title);
+		String dialog_title = (String) v.getTag();
+		Button b = (Button) v;
+		String button_text = b.getText().toString();
+		button_text = button_text.equals(dialog_title) ? null : button_text;
+		DialogFragment newFragment = new CitationDialog(dialog_title, button_id, button_text);
+		newFragment.show(getSupportFragmentManager(), dialog_title);
 	}
 
 	@Override
@@ -266,13 +269,15 @@ public class CitationActivity extends FragmentActivity implements
 
 		private String _title;
 		private int _buttonId;
+		private String _buttonText;
 
 		/*
 		 * public CitationDialog(){ super(); }
 		 */
-		public CitationDialog(String s, int id) {
+		public CitationDialog(String s, int id, String text) {
 			this._title = s;
 			this._buttonId = id;
+			this._buttonText = text;
 		}
 
 		@Override
@@ -281,6 +286,10 @@ public class CitationActivity extends FragmentActivity implements
 			// Get the layout inflater
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			final View view = inflater.inflate(R.layout.dialog_citation, null);
+			
+			EditText value = (EditText) view.findViewById(R.id.value);
+			value.setText(_buttonText);
+
 
 			// Inflate and set the layout for the dialog
 			// Pass null as the parent view because its going in the dialog
@@ -305,6 +314,7 @@ public class CitationActivity extends FragmentActivity implements
 									CitationDialog.this.getDialog().cancel();
 								}
 							}).setTitle(_title);
+			
 			return builder.create();
 		}
 	}
