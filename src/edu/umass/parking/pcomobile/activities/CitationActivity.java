@@ -91,12 +91,18 @@ public class CitationActivity extends FragmentActivity implements
 		}
 	}
 
-	// Opens the dialog windows to enter citation parameters
+	// Opens dialog windows (DialogFragment) to enter citation parameters
+	// DialogFragment is constructed with three parameters: title, id and the text of the button
+	// that calls the dialog.
 	public void showDialog(View v) {
 		int button_id = v.getId();
 		String dialog_title = (String) v.getTag();
 		Button b = (Button) v;
 		String button_text = b.getText().toString();
+		
+		// That the title is not equal to the button text, means that the operator entered
+		// a value for that button. That value should be kept if operator activates the same 
+		// dialog window.
 		button_text = button_text.equals(dialog_title) ? null : button_text;
 		DialogFragment newFragment = new CitationDialog(dialog_title, button_id, button_text);
 		newFragment.show(getSupportFragmentManager(), dialog_title);
