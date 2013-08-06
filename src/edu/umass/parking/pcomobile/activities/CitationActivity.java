@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import edu.umass.parking.pcomobile.R;
 
 public class CitationActivity extends FragmentActivity implements
@@ -90,9 +91,11 @@ public class CitationActivity extends FragmentActivity implements
 		}
 	}
 
+	// Opens the dialog windows to enter citation parameters
 	public void showDialog(View v) {
-		String title = (String) v.getTag(); 
-		DialogFragment newFragment = new CitationDialog(title);
+		String title = (String) v.getTag();
+		int button_id = v.getId();
+		DialogFragment newFragment = new CitationDialog(title, button_id);
 		newFragment.show(getSupportFragmentManager(), title);
 	}
 
@@ -260,35 +263,39 @@ public class CitationActivity extends FragmentActivity implements
 
 	public class CitationDialog extends DialogFragment {
 		/** The system calls this only when creating the layout in a dialog. */
-		
+
 		private String _title;
-		
-/*		public CitationDialog(){
-			super();
-		}
-*/		
-		public CitationDialog(String s){
+		private int _buttonId;
+
+		/*
+		 * public CitationDialog(){ super(); }
+		 */
+		public CitationDialog(String s, int id) {
 			this._title = s;
+			this._buttonId = id;
 		}
-		
+
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			// Get the layout inflater
 			LayoutInflater inflater = getActivity().getLayoutInflater();
+			final View view = inflater.inflate(R.layout.dialog_citation, null);
 
 			// Inflate and set the layout for the dialog
 			// Pass null as the parent view because its going in the dialog
 			// layout
-			builder.setView(
-					inflater.inflate(R.layout.dialog_citation, null))
+			builder.setView(view)
 					// Add action buttons
 					.setPositiveButton(R.string.dialog_confirm_button,
 							new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog,
 										int id) {
-									// sign in the user ...
+									EditText value = (EditText) view
+											.findViewById(R.id.value);
+									Button b = (Button) findViewById(_buttonId);
+									b.setText(value.getText().toString());
 								}
 							})
 					.setNegativeButton(R.string.dialog_cancel_button,
@@ -297,8 +304,7 @@ public class CitationActivity extends FragmentActivity implements
 										int id) {
 									CitationDialog.this.getDialog().cancel();
 								}
-							})
-					.setTitle(_title);
+							}).setTitle(_title);
 			return builder.create();
 		}
 	}
