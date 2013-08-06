@@ -23,11 +23,21 @@
             android:onClick="startCitationActivity"
             android:text="@string/citation_button" />
 
+        <View
+            android:layout_width="2dp"
+            android:layout_height="fill_parent"
+            android:background="#90909090" />
+
         <Button
             android:id="@+id/chalk"
             style="@style/menu_button"
             android:text="@string/chalk_button" />
     </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="#90909090" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -42,11 +52,21 @@
             style="@style/menu_button"
             android:text="@string/history_button" />
 
+        <View
+            android:layout_width="2dp"
+            android:layout_height="fill_parent"
+            android:background="#90909090" />
+
         <Button
             android:id="@+id/paybycell"
             style="@style/menu_button"
             android:text="@string/paybycell_button" />
     </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="#90909090" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,14 +79,24 @@
         <Button
             android:id="@+id/update_db"
             style="@style/menu_button"
-            android:text="@string/update_db_button"
-            android:onClick="startUpdateDbActivity" />
+            android:onClick="startUpdateDbActivity"
+            android:text="@string/update_db_button" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="fill_parent"
+            android:background="#90909090" />
 
         <Button
             android:id="@+id/setup"
             style="@style/menu_button"
             android:text="@string/setup_button" />
     </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="#90909090" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -80,6 +110,11 @@
             android:id="@+id/printer"
             style="@style/menu_button"
             android:text="@string/printer_button" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="fill_parent"
+            android:background="#90909090" />
 
         <Button
             android:id="@+id/logout"

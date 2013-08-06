@@ -90,9 +90,10 @@ public class CitationActivity extends FragmentActivity implements
 		}
 	}
 
-	public void confirmFireMissiles(View v) {
-		DialogFragment newFragment = new CitationDialog();
-		newFragment.show(getSupportFragmentManager(), "missiles");
+	public void showDialog(View v) {
+		String title = (String) v.getTag(); 
+		DialogFragment newFragment = new CitationDialog(title);
+		newFragment.show(getSupportFragmentManager(), title);
 	}
 
 	@Override
@@ -259,6 +260,17 @@ public class CitationActivity extends FragmentActivity implements
 
 	public class CitationDialog extends DialogFragment {
 		/** The system calls this only when creating the layout in a dialog. */
+		
+		private String _title;
+		
+/*		public CitationDialog(){
+			super();
+		}
+*/		
+		public CitationDialog(String s){
+			this._title = s;
+		}
+		
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -269,9 +281,9 @@ public class CitationActivity extends FragmentActivity implements
 			// Pass null as the parent view because its going in the dialog
 			// layout
 			builder.setView(
-					inflater.inflate(R.layout.dialog_citation_state, null))
+					inflater.inflate(R.layout.dialog_citation, null))
 					// Add action buttons
-					.setPositiveButton("gir",
+					.setPositiveButton(R.string.dialog_confirm_button,
 							new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog,
@@ -279,13 +291,14 @@ public class CitationActivity extends FragmentActivity implements
 									// sign in the user ...
 								}
 							})
-					.setNegativeButton("cik",
+					.setNegativeButton(R.string.dialog_cancel_button,
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
 										int id) {
 									CitationDialog.this.getDialog().cancel();
 								}
-							});
+							})
+					.setTitle(_title);
 			return builder.create();
 		}
 	}
