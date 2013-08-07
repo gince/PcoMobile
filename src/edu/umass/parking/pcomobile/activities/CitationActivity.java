@@ -21,9 +21,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import edu.umass.parking.pcomobile.R;
+import edu.umass.parking.pcomobile.helpers.DatabaseHelper;
 
 public class CitationActivity extends FragmentActivity implements
 		ActionBar.TabListener {
@@ -92,19 +95,23 @@ public class CitationActivity extends FragmentActivity implements
 	}
 
 	// Opens dialog windows (DialogFragment) to enter citation parameters
-	// DialogFragment is constructed with three parameters: title, id and the text of the button
+	// DialogFragment is constructed with three parameters: title, id and the
+	// text of the button
 	// that calls the dialog.
 	public void showDialog(View v) {
 		int button_id = v.getId();
 		String dialog_title = (String) v.getTag();
 		Button b = (Button) v;
 		String button_text = b.getText().toString();
-		
-		// That the title is not equal to the button text, means that the operator entered
-		// a value for that button. That value should be kept if operator activates the same 
+
+		// That the title is not equal to the button text, means that the
+		// operator entered
+		// a value for that button. That value should be kept if operator
+		// activates the same
 		// dialog window.
 		button_text = button_text.equals(dialog_title) ? null : button_text;
-		DialogFragment newFragment = new CitationDialog(dialog_title, button_id, button_text);
+		DialogFragment newFragment = new CitationDialog(dialog_title,
+				button_id, button_text);
 		newFragment.show(getSupportFragmentManager(), dialog_title);
 	}
 
@@ -293,9 +300,28 @@ public class CitationActivity extends FragmentActivity implements
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			final View view = inflater.inflate(R.layout.dialog_citation, null);
 			
-			EditText value = (EditText) view.findViewById(R.id.value);
-			value.setText(_buttonText);
-
+			// Gets a reference to the AutoCompleteTextView in the layout fragment_citation.xml
+			final AutoCompleteTextView atw = (AutoCompleteTextView) view.findViewById(R.id.value);
+			atw.setText(_buttonText); // sets the text to default or previous entry
+			atw.setThreshold(1); // sets the number of characters after which autocomplete responds
+			
+			// Creates a database instance and gets the codes/descriptions to use for autocomplete
+			DatabaseHelper dh = new DatabaseHelper(view.getContext());
+			String[] valuesForAutocomplete = new String[0];
+			
+			if(_title.equals("State"))
+				valuesForAutocomplete = dh.getCodesDescsFromLookupTables("states", "code");
+			else if (_title.equals("Make"))
+				valuesForAutocomplete = dh.getCodesDescsFromLookupTables("vehicle_makes", "description");
+			else if (_title.equals("Color"))
+				valuesForAutocomplete = dh.getCodesDescsFromLookupTables("vehicle_colors", "description");
+			else if (_title.equals("Type"))
+				valuesForAutocomplete = dh.getCodesDescsFromLookupTables("plate_types", "description");
+			
+			// Creates the adapter and set it to the AutoCompleteTextView 
+			ArrayAdapter<String> adapter = 
+			        new ArrayAdapter<String>(CitationActivity.this, android.R.layout.simple_list_item_1, valuesForAutocomplete);
+			atw.setAdapter(adapter);
 
 			// Inflate and set the layout for the dialog
 			// Pass null as the parent view because its going in the dialog
@@ -307,10 +333,8 @@ public class CitationActivity extends FragmentActivity implements
 								@Override
 								public void onClick(DialogInterface dialog,
 										int id) {
-									EditText value = (EditText) view
-											.findViewById(R.id.value);
 									Button b = (Button) findViewById(_buttonId);
-									b.setText(value.getText().toString());
+									b.setText(atw.getText().toString());
 								}
 							})
 					.setNegativeButton(R.string.dialog_cancel_button,

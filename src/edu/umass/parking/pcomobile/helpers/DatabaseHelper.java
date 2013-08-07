@@ -25,12 +25,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String TABLE_VEH_MAKES = "vehicle_makes";
 	private static final String TABLE_PLATE_TYPES = "plate_types";
 	private static final String TABLE_PERMIT_STATUS = "permit_status";
-	
+
 	// attributes of lookup table
 	public static final String COLUMN_ID = "id";
 	public static final String COLUMN_CODE = "code";
 	public static final String COLUMN_DESC = "description";
-	
+
 	// attributes of PermitVehicle table
 	private static final String TABLE_PERMIT_VEHICLE = "permit_vehicle";
 	public static final String COLUMN_PERVEH_ID = "id";
@@ -55,16 +55,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		String createStaffTable = "CREATE TABLE " + TABLE_STAFF + "("
 				+ COLUMN_STAFF_ID + " INTEGER, " + COLUMN_STAFF_CODE
 				+ " TEXT, " + COLUMN_STAFF_DESC + " TEXT);";
-		
+
 		String createStatesTable = getCreateLookupTableQuery(TABLE_STATES);
 		String createVehicleColorsTable = getCreateLookupTableQuery(TABLE_VEH_COLORS);
 		String createVehicleMakesTable = getCreateLookupTableQuery(TABLE_VEH_MAKES);
 		String createPlateTypesTable = getCreateLookupTableQuery(TABLE_PLATE_TYPES);
 		String createPermitStatusTable = getCreateLookupTableQuery(TABLE_PERMIT_STATUS);
-		
+
 		// query that creates TABLE_PERMIT_VEHICLE table
 		String createPermitVehicleTable = "CREATE TABLE "
-				+ TABLE_PERMIT_VEHICLE + "(" + COLUMN_PERVEH_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , "
+				+ TABLE_PERMIT_VEHICLE + "(" + COLUMN_PERVEH_ID
+				+ " INTEGER PRIMARY KEY AUTOINCREMENT , "
 				+ COLUMN_PERVEH_PER_NMBR + " TEXT, " + COLUMN_PERVEH_PER_STRT
 				+ " TEXT, " + COLUMN_PERVEH_PER_EXPR + " TEXT, "
 				+ COLUMN_PERVEH_PER_STTS + " INTEGER, "
@@ -84,11 +85,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL(createPermitVehicleTable);
 
 	}
-	
+
 	public String getCreateLookupTableQuery(String tableName) {
-		String query = "CREATE TABLE " + tableName + "("
-				+ COLUMN_ID + " INTEGER, " + COLUMN_CODE
-				+ " TEXT, " + COLUMN_DESC + " TEXT);";
+		String query = "CREATE TABLE " + tableName + "(" + COLUMN_ID
+				+ " INTEGER, " + COLUMN_CODE + " TEXT, " + COLUMN_DESC
+				+ " TEXT);";
 		return query;
 	}
 
@@ -117,7 +118,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.insert(tableName, null, values);
 		db.close();
 	}
-	
+
 	public void addToPermitVehicleTable(PermitVehicle perveh) {
 
 		ContentValues values = new ContentValues();
@@ -138,8 +139,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 
 	public Lookup getLookupEntry(String code, String tableName) {
-		String query = "Select * FROM " + tableName + " WHERE "
-				+ COLUMN_CODE + " =  \"" + code + "\"";
+		String query = "Select * FROM " + tableName + " WHERE " + COLUMN_CODE
+				+ " =  \"" + code + "\"";
 
 		SQLiteDatabase db = this.getWritableDatabase();
 
@@ -159,4 +160,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.close();
 		return l;
 	}
+
+	public String[] getCodesDescsFromLookupTables(String tableName, String column) {
+		String query = "SELECT " + column + " FROM " + tableName;
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		Cursor cursor = db.rawQuery(query, null);
+	
+		int i = 0;
+		if (cursor.getCount() > 0) {
+			String[] codes = new String[cursor.getCount()];
+			while (cursor.moveToNext()) {
+				codes[i] = cursor.getString(cursor.getColumnIndex(column));
+				i++;
+			}
+			return codes;
+		}
+		db.close();
+		return null;
+	}	
 }
