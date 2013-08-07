@@ -15,6 +15,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -316,7 +317,15 @@ public class CitationActivity extends FragmentActivity implements
 			else if (_title.equals("Color"))
 				valuesForAutocomplete = dh.getCodesDescsFromLookupTables("vehicle_colors", "description");
 			else if (_title.equals("Type"))
-				valuesForAutocomplete = dh.getCodesDescsFromLookupTables("plate_types", "description");
+				valuesForAutocomplete = dh.getCodesDescsFromLookupTables("plate_types", "code");
+			else if (_title.equals("Location"))
+				valuesForAutocomplete = dh.getCodesDescsFromLookupTables("locations", "description");
+			else if (_title.equals("Violation"))
+				valuesForAutocomplete = dh.getCodesDescsFromLookupTables("violations", "description");
+			else if (_title.equals("Comments (public)") || _title.equals("Comments (private)"))
+				valuesForAutocomplete = dh.getCodesDescsFromLookupTables("comments", "description");
+			else if (_title.equals("Fine"))
+				atw.setInputType(InputType.TYPE_CLASS_NUMBER);
 			
 			// Creates the adapter and set it to the AutoCompleteTextView 
 			ArrayAdapter<String> adapter = 
@@ -334,7 +343,10 @@ public class CitationActivity extends FragmentActivity implements
 								public void onClick(DialogInterface dialog,
 										int id) {
 									Button b = (Button) findViewById(_buttonId);
-									b.setText(atw.getText().toString());
+									if (_title.equals("Fine"))
+										b.setText("$" + atw.getText().toString());
+									else
+										b.setText(atw.getText().toString());
 								}
 							})
 					.setNegativeButton(R.string.dialog_cancel_button,

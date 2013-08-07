@@ -10,7 +10,7 @@ import edu.umass.parking.pcomobile.models.PermitVehicle;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-	private static final int DATABASE_VERSION = 1; // may be deleted
+	private static final int DATABASE_VERSION = 2; // may be deleted
 	private static final String DATABASE_NAME = "pcoMobile";
 
 	// attributes of staff table
@@ -25,6 +25,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String TABLE_VEH_MAKES = "vehicle_makes";
 	private static final String TABLE_PLATE_TYPES = "plate_types";
 	private static final String TABLE_PERMIT_STATUS = "permit_status";
+	private static final String TABLE_LOCATIONS = "locations";
+	private static final String TABLE_VIOLATIONS = "violations";
+	private static final String TABLE_COMMENTS = "comments";
 
 	// attributes of lookup table
 	public static final String COLUMN_ID = "id";
@@ -61,6 +64,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		String createVehicleMakesTable = getCreateLookupTableQuery(TABLE_VEH_MAKES);
 		String createPlateTypesTable = getCreateLookupTableQuery(TABLE_PLATE_TYPES);
 		String createPermitStatusTable = getCreateLookupTableQuery(TABLE_PERMIT_STATUS);
+		String createLocationsTable = getCreateLookupTableQuery(TABLE_LOCATIONS);
+		String createViolationsTable = getCreateLookupTableQuery(TABLE_VIOLATIONS);
+		String createCommentsTable = getCreateLookupTableQuery(TABLE_COMMENTS);
 
 		// query that creates TABLE_PERMIT_VEHICLE table
 		String createPermitVehicleTable = "CREATE TABLE "
@@ -83,6 +89,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL(createPlateTypesTable);
 		db.execSQL(createPermitStatusTable);
 		db.execSQL(createPermitVehicleTable);
+		db.execSQL(createLocationsTable);
+		db.execSQL(createViolationsTable);
+		db.execSQL(createCommentsTable);
 
 	}
 
@@ -102,6 +111,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_PLATE_TYPES);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_PERMIT_STATUS);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_PERMIT_VEHICLE);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_LOCATIONS);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_VIOLATIONS);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_COMMENTS);
 		onCreate(db);
 	}
 

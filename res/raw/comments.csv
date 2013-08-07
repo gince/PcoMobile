@@ -1,0 +1,30 @@
+2016,RSRS,Resident Staff Reserved Space
+2027,PBUS,Parked in Bus Stop
+2028,NDD,No Dash Display
+2000,SCOF,> 5 Unpaid Tickets
+2017,RESSP,In Reserved State Space
+2018,VENSP,In Reserved Vendor Space
+2019,NOFL,No Flashers On
+2001,IMP,Impounded
+2002,CPS,Please Contact Parking Services
+2003,SP,See Photos
+2004,S79,Signal 79
+2005,L24HR,Lot 24 Hour Enforced
+2006,POH,Parked on Hashmarks
+2007,PAR,Parked Along Roadway
+2008,PPA,Parked in Pedestrian Area
+2009,POG,Parked on Grass
+2010,AP,Altered Permit
+2011,NPD,No Permit Displayed
+2012,PIC,Permit Info Covered
+2013,CRP,Cannot Read Permit
+2014,UC,Used Other Camera
+2015,PNV,Permit Not Valid in Lot/Area
+2021,DIFCUST,Customer very difficult/abusive
+2025,PBS,Parked Blocking Stairs
+2022,NPZ,No Parking Zone
+2023,PSW,Parked on Sidewalk
+2024,PLD,Parked within Loading Dock
+2026,PAL,Parked in Access Lane
+2020,MOMATCH,Plate does not match Permit
+2029,EDD,Expired dash display

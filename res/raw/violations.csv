@@ -1,0 +1,25 @@
+0, ,
+2026,#01,#01 Handicap Space (No Appeal)
+2027,#02,#02 Fraudulent Use of a Permit
+2028,#03,#03 Special Enforcement Zone
+2029,#04,#04 Improper Loading Zone Use
+2030,#05,#05 Within 10' of a Fire Hydrant
+2031,#06,#06 Fire Lane / Fire Zone
+2032,#07,#07 Emergency Vehicle Zone
+2033,#08,#08 Within a Reserved Space/Lot
+2034,#09,#09 In a Bus Stop
+2035,#10,#10 Blocking Platform/Serv. Area
+2036,#11,#11 In Posted Service/Deliv Area
+2037,#12,#12 In a No Parking Zone/Area
+2038,#13,#13 No Valid UMass Park. Permit
+2039,#14,#14 Permit Not Valid in Lot/Area
+2040,#15,#15 Double Parking
+2041,#16,#16 In Front of Driveway
+2042,#17,#17 Not Within Marked Lines
+2043,#18,#18 Facing Flow of Traffic
+2044,#19,#19 Violation of Snow Policy
+2045,#20,#20 Improper Display of Permit
+2046,#21,#21 Meter Violation (No Appeal)
+2048,#23,#23 Impound / Skofflaw
+2050,#25,#25 UMPD - Special Alert
+2051,#26,#26 Towing

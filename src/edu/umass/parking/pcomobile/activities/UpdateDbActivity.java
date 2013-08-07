@@ -35,7 +35,10 @@ public class UpdateDbActivity extends Activity {
 		updateLookupTable("vehicle_makes");
 		updateLookupTable("permit_status");
 		updateLookupTable("plate_types");
-		updatePermitVehicleTable();
+		updateLookupTable("locations");
+		updateLookupTable("violations");
+		updateLookupTable("comments");
+//		updatePermitVehicleTable();
 	}
 
 	// updates a given table getting data from the csv file
