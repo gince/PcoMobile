@@ -25,7 +25,7 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.CheckBox;
 import edu.umass.parking.pcomobile.R;
 import edu.umass.parking.pcomobile.helpers.DatabaseHelper;
 
@@ -299,39 +299,57 @@ public class CitationActivity extends FragmentActivity implements
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			// Get the layout inflater
 			LayoutInflater inflater = getActivity().getLayoutInflater();
-			final View view = inflater.inflate(R.layout.dialog_citation, null);
-			
-			// Gets a reference to the AutoCompleteTextView in the layout fragment_citation.xml
-			final AutoCompleteTextView atw = (AutoCompleteTextView) view.findViewById(R.id.value);
-			atw.setText(_buttonText); // sets the text to default or previous entry
-			atw.setThreshold(1); // sets the number of characters after which autocomplete responds
-			
-			// Creates a database instance and gets the codes/descriptions to use for autocomplete
+			final View view;
+			if (_title.equals("Violation"))
+				view = inflater.inflate(R.layout.dialog_citation_with_checkbox, null);
+			else
+				view = inflater.inflate(R.layout.dialog_citation, null);
+			// Gets a reference to the AutoCompleteTextView in the layout
+			// fragment_citation.xml
+			final AutoCompleteTextView atw = (AutoCompleteTextView) view
+					.findViewById(R.id.value);
+			atw.setText(_buttonText); // sets the text to default or previous
+										// entry
+			atw.setThreshold(1); // sets the number of characters after which
+									// autocomplete responds
+
+			// Creates a database instance and gets the codes/descriptions to
+			// use for autocomplete
 			DatabaseHelper dh = new DatabaseHelper(view.getContext());
 			String[] valuesForAutocomplete = new String[0];
-			
-			if(_title.equals("State"))
-				valuesForAutocomplete = dh.getCodesDescsFromLookupTables("states", "code");
+
+			if (_title.equals("State"))
+				valuesForAutocomplete = dh.getCodesDescsFromLookupTables(
+						"states", "code");
 			else if (_title.equals("Make"))
-				valuesForAutocomplete = dh.getCodesDescsFromLookupTables("vehicle_makes", "description");
+				valuesForAutocomplete = dh.getCodesDescsFromLookupTables(
+						"vehicle_makes", "description");
 			else if (_title.equals("Color"))
-				valuesForAutocomplete = dh.getCodesDescsFromLookupTables("vehicle_colors", "description");
+				valuesForAutocomplete = dh.getCodesDescsFromLookupTables(
+						"vehicle_colors", "description");
 			else if (_title.equals("Type"))
-				valuesForAutocomplete = dh.getCodesDescsFromLookupTables("plate_types", "code");
+				valuesForAutocomplete = dh.getCodesDescsFromLookupTables(
+						"plate_types", "code");
 			else if (_title.equals("Location"))
-				valuesForAutocomplete = dh.getCodesDescsFromLookupTables("locations", "description");
+				valuesForAutocomplete = dh.getCodesDescsFromLookupTables(
+						"locations", "description");
 			else if (_title.equals("Violation"))
-				valuesForAutocomplete = dh.getCodesDescsFromLookupTables("violations", "description");
-			else if (_title.equals("Comments (public)") || _title.equals("Comments (private)"))
-				valuesForAutocomplete = dh.getCodesDescsFromLookupTables("comments", "description");
+				valuesForAutocomplete = dh.getCodesDescsFromLookupTables(
+						"violations", "description");
+			else if (_title.equals("Comments (public)")
+					|| _title.equals("Comments (private)"))
+				valuesForAutocomplete = dh.getCodesDescsFromLookupTables(
+						"comments", "description");
 			else if (_title.equals("Fine"))
 				atw.setInputType(InputType.TYPE_CLASS_NUMBER);
-			
-			// Creates the adapter and set it to the AutoCompleteTextView 
-			ArrayAdapter<String> adapter = 
-			        new ArrayAdapter<String>(CitationActivity.this, android.R.layout.simple_list_item_1, valuesForAutocomplete);
+
+			// Creates the adapter and set it to the AutoCompleteTextView
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+					CitationActivity.this, android.R.layout.simple_list_item_1,
+					valuesForAutocomplete);
 			atw.setAdapter(adapter);
 
+			final CheckBox cb = new CheckBox(getApplicationContext());
 			// Inflate and set the layout for the dialog
 			// Pass null as the parent view because its going in the dialog
 			// layout
@@ -344,7 +362,8 @@ public class CitationActivity extends FragmentActivity implements
 										int id) {
 									Button b = (Button) findViewById(_buttonId);
 									if (_title.equals("Fine"))
-										b.setText("$" + atw.getText().toString());
+										b.setText("$"
+												+ atw.getText().toString());
 									else
 										b.setText(atw.getText().toString());
 								}
@@ -356,7 +375,7 @@ public class CitationActivity extends FragmentActivity implements
 									CitationDialog.this.getDialog().cancel();
 								}
 							}).setTitle(_title);
-			
+
 			return builder.create();
 		}
 	}

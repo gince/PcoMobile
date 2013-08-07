@@ -16,6 +16,7 @@
     <string name="dialog_hint">Please enter..</string>
     <string name="dialog_default"></string>
     <string name="dialog_state_default">MA</string>
+    <string name="dialog_warning">Warning ?</string>
     <!-- menu buttons -->
     <string name="citation_button">Citation</string>
     <string name="chalk_button">Chalk</string>
