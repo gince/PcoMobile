@@ -190,5 +190,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		}
 		db.close();
 		return null;
+	}
+
+	public String[] getVehiclesByPermit(String perNum) {
+		String[] vehicles = null;
+
+		String query = "SELECT veh_plate FROM PERMIT_VEHICLE WHERE PER_NUMBER = \"" + perNum + "\"";
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		Cursor cursor = db.rawQuery(query, null);
+	
+		int i = 0;
+		if (cursor.getCount() > 0) {
+			String[] codes = new String[cursor.getCount()];
+			while (cursor.moveToNext()) {
+				codes[i] = cursor.getString(cursor.getColumnIndex("veh_plate"));
+				i++;
+			}
+			return codes;
+		}
+		db.close();
+		return vehicles;
 	}	
 }

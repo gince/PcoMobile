@@ -321,6 +321,12 @@ public class CitationActivity extends FragmentActivity implements
 			if (_title.equals("State"))
 				valuesForAutocomplete = dh.getCodesDescsFromLookupTables(
 						"states", "code");
+			else if (_title.equals("Permit #")) {
+//				Button b = (Button) v;
+				Button pb = (Button) view.findViewById(R.id.plate_button);
+				String pb_text = pb.getText().toString();
+				valuesForAutocomplete = dh.getVehiclesByPermit(pb_text);
+			}
 			else if (_title.equals("Make"))
 				valuesForAutocomplete = dh.getCodesDescsFromLookupTables(
 						"vehicle_makes", "description");

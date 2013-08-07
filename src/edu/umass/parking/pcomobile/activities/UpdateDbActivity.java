@@ -38,7 +38,7 @@ public class UpdateDbActivity extends Activity {
 		updateLookupTable("locations");
 		updateLookupTable("violations");
 		updateLookupTable("comments");
-//		updatePermitVehicleTable();
+		updatePermitVehicleTable();
 	}
 
 	// updates a given table getting data from the csv file
@@ -77,7 +77,7 @@ public class UpdateDbActivity extends Activity {
 
 	public void updatePermitVehicleTable() {
 		DatabaseHelper dbh = new DatabaseHelper(this);
-		InputStream is = getResources().openRawResource(R.raw.permitvehicle);
+		InputStream is = getResources().openRawResource(R.raw.perveh_demo);
 		InputStreamReader isr = new InputStreamReader(is);
 		BufferedReader br = new BufferedReader(isr);
 
