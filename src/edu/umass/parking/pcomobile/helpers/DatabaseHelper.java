@@ -202,12 +202,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	
 		int i = 0;
 		if (cursor.getCount() > 0) {
-			String[] codes = new String[cursor.getCount()];
+			vehicles = new String[cursor.getCount()];
 			while (cursor.moveToNext()) {
-				codes[i] = cursor.getString(cursor.getColumnIndex("veh_plate"));
+				vehicles[i] = cursor.getString(cursor.getColumnIndex("veh_plate"));
 				i++;
 			}
-			return codes;
+			return vehicles;
 		}
 		db.close();
 		return vehicles;
