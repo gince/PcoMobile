@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-    <edu.umass.parking.pcomobile.helpers.ZeroThresholdACTextView
+    <edu.umass.parking.pcomobile.helpers.InstantAutoComplete
         android:id="@+id/value"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

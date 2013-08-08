@@ -27,7 +27,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import edu.umass.parking.pcomobile.R;
 import edu.umass.parking.pcomobile.helpers.DatabaseHelper;
-import edu.umass.parking.pcomobile.helpers.ZeroThresholdACTextView;
+import edu.umass.parking.pcomobile.helpers.InstantAutoComplete;
 
 public class CitationActivity extends FragmentActivity implements
 		ActionBar.TabListener {
@@ -301,19 +301,19 @@ public class CitationActivity extends FragmentActivity implements
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			final View view;
 			if (_title.equals("Violation"))
-				view = inflater.inflate(R.layout.dialog_citation_with_checkbox, null);
+				view = inflater.inflate(R.layout.dialog_citation_with_checkbox,
+						null);
 			else
 				view = inflater.inflate(R.layout.dialog_citation, null);
 			// Gets a reference to the AutoCompleteTextView in the layout
 			// fragment_citation.xml
-			final ZeroThresholdACTextView atw = (ZeroThresholdACTextView) view
+			final InstantAutoComplete atw = (InstantAutoComplete) view
 					.findViewById(R.id.value);
 			atw.setText(_buttonText); // sets the text to default or previous
 										// entry
 			atw.setThreshold(0); // sets the number of characters after which
 									// autocomplete responds
-			
-			
+
 			// Creates a database instance and gets the codes/descriptions to
 			// use for autocomplete
 			final DatabaseHelper dh = new DatabaseHelper(view.getContext());
@@ -321,17 +321,19 @@ public class CitationActivity extends FragmentActivity implements
 
 			final Button plateBtn = (Button) findViewById(R.id.plate_button);
 			final Button stateBtn = (Button) findViewById(R.id.state_button);
-			final String plateBtn_text = plateBtn.getText().toString().toUpperCase();
-			final String stateBtn_text = stateBtn.getText().toString().toUpperCase();
-			
+			final String plateBtn_text = plateBtn.getText().toString()
+					.toUpperCase();
+			final String stateBtn_text = stateBtn.getText().toString()
+					.toUpperCase();
+
 			if (_title.equals("State"))
 				valuesForAutocomplete = dh.getCodesDescsFromLookupTables(
 						"states", "code");
 			else if (_title.equals("Permit #")) {
 				if (!plateBtn_text.equals("Plate #"))
-					valuesForAutocomplete = dh.getPermitsByPlate(stateBtn_text, plateBtn_text);
-			}
-			else if (_title.equals("Make"))
+					valuesForAutocomplete = dh.getPermitsByPlate(stateBtn_text,
+							plateBtn_text);
+			} else if (_title.equals("Make"))
 				valuesForAutocomplete = dh.getCodesDescsFromLookupTables(
 						"vehicle_makes", "description");
 			else if (_title.equals("Color"))
@@ -375,16 +377,21 @@ public class CitationActivity extends FragmentActivity implements
 										b.setText("$"
 												+ atw.getText().toString());
 									else if (_title.equals("Plate #")) {
-										b.setText(atw.getText().toString().toUpperCase());
-										String[] details = dh.getVehicleDetails(stateBtn_text, atw.getText().toString().toUpperCase());
+										b.setText(atw.getText().toString()
+												.toUpperCase());
+										String[] details = dh
+												.getVehicleDetails(
+														stateBtn_text, atw
+																.getText()
+																.toString()
+																.toUpperCase());
 										Button typeBtn = (Button) findViewById(R.id.veh_type_button);
 										Button colrBtn = (Button) findViewById(R.id.veh_color_button);
 										Button makeBtn = (Button) findViewById(R.id.veh_make_button);
 										typeBtn.setText(details[0]);
 										colrBtn.setText(details[1]);
 										makeBtn.setText(details[2]);
-									}
-									else
+									} else
 										b.setText(atw.getText().toString());
 								}
 							})
@@ -399,6 +406,5 @@ public class CitationActivity extends FragmentActivity implements
 			return builder.create();
 		}
 	}
-	
-	
+
 }
