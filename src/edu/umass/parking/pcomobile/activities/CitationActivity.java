@@ -321,8 +321,8 @@ public class CitationActivity extends FragmentActivity implements
 
 			final Button plateBtn = (Button) findViewById(R.id.plate_button);
 			final Button stateBtn = (Button) findViewById(R.id.state_button);
-			final String plateBtn_text = plateBtn.getText().toString();
-			final String stateBtn_text = stateBtn.getText().toString();
+			final String plateBtn_text = plateBtn.getText().toString().toUpperCase();
+			final String stateBtn_text = stateBtn.getText().toString().toUpperCase();
 			
 			if (_title.equals("State"))
 				valuesForAutocomplete = dh.getCodesDescsFromLookupTables(
@@ -375,8 +375,8 @@ public class CitationActivity extends FragmentActivity implements
 										b.setText("$"
 												+ atw.getText().toString());
 									else if (_title.equals("Plate #")) {
-										b.setText(atw.getText().toString());
-										String[] details = dh.getVehicleDetails(stateBtn_text, atw.getText().toString());
+										b.setText(atw.getText().toString().toUpperCase());
+										String[] details = dh.getVehicleDetails(stateBtn_text, atw.getText().toString().toUpperCase());
 										Button typeBtn = (Button) findViewById(R.id.veh_type_button);
 										Button colrBtn = (Button) findViewById(R.id.veh_color_button);
 										Button makeBtn = (Button) findViewById(R.id.veh_make_button);
