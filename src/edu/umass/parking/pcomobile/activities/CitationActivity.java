@@ -23,11 +23,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import edu.umass.parking.pcomobile.R;
 import edu.umass.parking.pcomobile.helpers.DatabaseHelper;
+import edu.umass.parking.pcomobile.helpers.ZeroThresholdACTextView;
 
 public class CitationActivity extends FragmentActivity implements
 		ActionBar.TabListener {
@@ -306,26 +306,30 @@ public class CitationActivity extends FragmentActivity implements
 				view = inflater.inflate(R.layout.dialog_citation, null);
 			// Gets a reference to the AutoCompleteTextView in the layout
 			// fragment_citation.xml
-			final AutoCompleteTextView atw = (AutoCompleteTextView) view
+			final ZeroThresholdACTextView atw = (ZeroThresholdACTextView) view
 					.findViewById(R.id.value);
 			atw.setText(_buttonText); // sets the text to default or previous
 										// entry
-			atw.setThreshold(1); // sets the number of characters after which
+			atw.setThreshold(0); // sets the number of characters after which
 									// autocomplete responds
-
+			
+			
 			// Creates a database instance and gets the codes/descriptions to
 			// use for autocomplete
-			DatabaseHelper dh = new DatabaseHelper(view.getContext());
+			final DatabaseHelper dh = new DatabaseHelper(view.getContext());
 			String[] valuesForAutocomplete = new String[0];
 
+			final Button plateBtn = (Button) findViewById(R.id.plate_button);
+			final Button stateBtn = (Button) findViewById(R.id.state_button);
+			final String plateBtn_text = plateBtn.getText().toString();
+			final String stateBtn_text = stateBtn.getText().toString();
+			
 			if (_title.equals("State"))
 				valuesForAutocomplete = dh.getCodesDescsFromLookupTables(
 						"states", "code");
 			else if (_title.equals("Permit #")) {
-//				Button b = (Button) v;
-				Button pb = (Button) findViewById(R.id.plate_button);
-				String pb_text = pb.getText().toString();
-				valuesForAutocomplete = dh.getVehiclesByPermit(pb_text);
+				if (!plateBtn_text.equals("Plate #"))
+					valuesForAutocomplete = dh.getPermitsByPlate(stateBtn_text, plateBtn_text);
 			}
 			else if (_title.equals("Make"))
 				valuesForAutocomplete = dh.getCodesDescsFromLookupTables(
@@ -370,6 +374,16 @@ public class CitationActivity extends FragmentActivity implements
 									if (_title.equals("Fine"))
 										b.setText("$"
 												+ atw.getText().toString());
+									else if (_title.equals("Plate #")) {
+										b.setText(atw.getText().toString());
+										String[] details = dh.getVehicleDetails(stateBtn_text, atw.getText().toString());
+										Button typeBtn = (Button) findViewById(R.id.veh_type_button);
+										Button colrBtn = (Button) findViewById(R.id.veh_color_button);
+										Button makeBtn = (Button) findViewById(R.id.veh_make_button);
+										typeBtn.setText(details[0]);
+										colrBtn.setText(details[1]);
+										makeBtn.setText(details[2]);
+									}
 									else
 										b.setText(atw.getText().toString());
 								}
@@ -385,4 +399,6 @@ public class CitationActivity extends FragmentActivity implements
 			return builder.create();
 		}
 	}
+	
+	
 }

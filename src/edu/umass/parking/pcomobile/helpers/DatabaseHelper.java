@@ -212,4 +212,77 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.close();
 		return vehicles;
 	}	
+	
+	public String[] getPermitsByPlate(String stateCode, String plate) {
+		String[] vehicles = null;
+
+		int stateId = getIdFromLookupTable("states", stateCode);
+		String query = "SELECT per_number FROM PERMIT_VEHICLE WHERE veh_state = " + stateId + " and veh_plate = \"" + plate + "\"";
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		Cursor cursor = db.rawQuery(query, null);
+	
+		int i = 0;
+		if (cursor.getCount() > 0) {
+			vehicles = new String[cursor.getCount()];
+			while (cursor.moveToNext()) {
+				vehicles[i] = cursor.getString(cursor.getColumnIndex("per_number"));
+				i++;
+			}
+			return vehicles;
+		}
+		db.close();
+		return vehicles;
+	}
+	
+	private int getIdFromLookupTable(String tableName, String code) {
+		String query = "SELECT id FROM " + tableName + " WHERE code = \"" + code + "\"";
+		
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(query, null);
+		
+		cursor.moveToNext();
+
+		return cursor.getInt(cursor.getColumnIndex("id"));
+	}
+
+	public String[] getVehicleDetails(String state, String plate) {
+		String[] details = new String[3];
+		
+		int stateId = getIdFromLookupTable("states", state);
+		String query = "SELECT plate_type, veh_color, veh_make FROM PERMIT_VEHICLE WHERE veh_state = " + stateId + " and veh_plate = \"" + plate + "\"";
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(query, null);
+		
+		cursor.moveToNext();
+		
+		int plateTypeId = cursor.getInt(cursor.getColumnIndex("plate_type"));
+		int colorId = cursor.getInt(cursor.getColumnIndex("veh_color"));
+		int makeId = cursor.getInt(cursor.getColumnIndex("veh_make"));
+		
+		String plateType = getCodeDescFromLookupTable("plate_types", "code", plateTypeId);
+		String color = getCodeDescFromLookupTable("vehicle_colors", "description", colorId);
+		String make = getCodeDescFromLookupTable("vehicle_makes", "description", makeId);
+
+		details[0] = plateType;
+		details[1] = color;
+		details[2] = make;
+		
+		return details;
+	}
+
+	private String getCodeDescFromLookupTable(String tableName, String column,
+			int id) {
+		
+		String codesc;
+		
+		String query = "SELECT " + column + " FROM " + tableName + " WHERE id = " + id;
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(query, null);
+		
+		cursor.moveToNext();
+		codesc = cursor.getString(cursor.getColumnIndex(column));
+		
+		return codesc;
+	}
 }
